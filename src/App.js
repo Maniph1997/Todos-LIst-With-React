@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+import InputType from "./components/InputType"
+import {useState} from 'react'
+import TodoList from "./components/TodoList"
 import './App.css';
 
 function App() {
+
+   const [listTodo, setListTodo] = useState([])
+
+   let addList= (inputText)=>{
+    if(inputText!=="")
+
+         setListTodo([...listTodo, inputText])
+
+   }
+
   return (
+    <div className="main-container">
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+      <InputType addList={addList}/>
+      {listTodo.map((listItem,i)=>{
+        return(
+          <TodoList key={i} item={listItem}/>
+        )
+      })}
+
+    </div>
     </div>
   );
 }
